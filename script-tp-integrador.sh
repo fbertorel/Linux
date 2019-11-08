@@ -56,32 +56,36 @@ do
 			;;
 		5)	clear
 			echo "Ingrese 5 numeros enteros: "
-			for ((i=0; i<=4; i++)) do
-				read  num[i]
-			done
-			for (( i=0; i<=4;i++)) do
-				for (( j=$i; j<=4; j++)) do
-					if [ ${num[$i]} -gt ${num[$j]} ]; then
-						aux=${num[$i]}
-						num[$i]=${num[$j]}
-						num[$j]=$aux
-					fi
-				done
-			done
-			echo "\n El numero ordenado es: " 
-				for ((i=0; i<=4; i++)) do
-					echo ${num[$i]}
-				done
+			vector=()
+			read -p "1) " n1
+			read -p "2) " n2
+			read -p "3) " n3
+			read -p "4) " n4
+			read -p "5) " n5
+			echo  "$n1,$n2,$n3,$n4,$n5" | tr "," "\n" | sort -n
 			;;
 		6)	clear
 			echo -e "\nCantidad de archivos en un directorio"
 			read -p "\nIngrese path de directorio: " dir
-			ls "$dir" | wc -l
+			echo "Cantidad de directorios: "
+			find $dir -type d | wc -l
+			echo "Cantidad de block: "
+			find $dir -type b | wc -l
+			echo "Cantidad de links: "
+			find $dir -type l | wc -l
+			echo "Cantidad de pipes: "
+			find $dir -type p | wc -l
+			echo "Cantidad de archivos: "
+			find $dir -type f | wc -l
+			echo "Cantidad de caracther: "
+			find $dir -type c | wc -l
 			;;
 		7)	clear
 			echo "Adios "$USER" "
 			exit 1
 			;;
+		*)	echo "Opcion invalida"
+			exit 1
 esac
 done
 
